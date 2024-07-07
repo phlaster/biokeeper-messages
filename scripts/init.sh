@@ -31,21 +31,24 @@ rabbitmqadmin -u $RABBITMQ_DEFAULT_USER -p $RABBITMQ_DEFAULT_PASS -V basic_vhost
 #
 
 # creating of user for auth service
-rabbitmqctl add_user $AUTH_USER $AUTH_PASS 2>/dev/null
+rabbitmqctl add_user $RABBITMQ_AUTH_USER $RABBITMQ_AUTH_PASS 2>/dev/null
+rabbitmqctl set_permissions -p basic_vhost $RABBITMQ_AUTH_USER ".*" ".*" ".*"
 
 # creating of user for core service
-rabbitmqctl add_user $CORE_USER $CORE_PASS 2>/dev/null
-
+rabbitmqctl add_user $RABBITMQ_CORE_USER $RABBITMQ_CORE_PASS 2>/dev/null
+rabbitmqctl set_permissions -p basic_vhost $RABBITMQ_CORE_USER ".*" ".*" ".*"
 
 #
 # SET PERMISSIONS FOR USERS
 #
 
-# allow AUTH_USER to write messages to users.topic with routing_key = new_user
-rabbitmqctl set_topic_permissions -p basic_vhost $AUTH_USER users.topic "^new_user" "^&"
+# allow RABBITMQ_AUTH_USER to write messages to users.topic with routing_key = new_user
+rabbitmqctl set_topic_permissions -p basic_vhost $RABBITMQ_AUTH_USER users.topic "^new_user" "^&"
 
-# allow CORE_USER to read messages from users.topic with routing_key = new_user
-rabbitmqctl set_topic_permissions -p basic_vhost $CORE_USER users.topic "^&" "^new_user"
+
+
+# allow RABBITMQ_CORE_USER to read messages from users.topic with routing_key = new_user
+rabbitmqctl set_topic_permissions -p basic_vhost $RABBITMQ_CORE_USER users.topic "^&" "^new_user"
 
 
 echo INITIALIZATION COMPLETED

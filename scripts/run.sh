@@ -4,6 +4,9 @@
 
 INIT_FLAG="/var/lib/rabbitmq/.initialized"
 
+STARTED_FLAG="/var/lib/rabbitmq/.started"
+rm -f $STARTED_FLAG
+
 if [ ! -f "$INIT_FLAG" ]; then
   echo "RabbitMQ not initialized. It will be initialized after start-up complete."
 

@@ -32,11 +32,11 @@ rabbitmqadmin -u $RABBITMQ_DEFAULT_USER -p $RABBITMQ_DEFAULT_PASS -V basic_vhost
 
 # creating of user for auth service
 rabbitmqctl add_user $RABBITMQ_AUTH_USER $RABBITMQ_AUTH_PASS 2>/dev/null
-rabbitmqctl set_permissions -p basic_vhost $RABBITMQ_AUTH_USER ".*" ".*" ".*"
+rabbitmqctl set_permissions -p basic_vhost $RABBITMQ_AUTH_USER "^&" "^users\.topic" "^&"
 
 # creating of user for core service
 rabbitmqctl add_user $RABBITMQ_CORE_USER $RABBITMQ_CORE_PASS 2>/dev/null
-rabbitmqctl set_permissions -p basic_vhost $RABBITMQ_CORE_USER ".*" ".*" ".*"
+rabbitmqctl set_permissions -p basic_vhost $RABBITMQ_CORE_USER "^&" "^&" "^users\.topic"
 
 #
 # SET PERMISSIONS FOR USERS

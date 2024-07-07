@@ -36,7 +36,7 @@ rabbitmqctl set_permissions -p basic_vhost $RABBITMQ_AUTH_USER "^&" "^users\.top
 
 # creating of user for core service
 rabbitmqctl add_user $RABBITMQ_CORE_USER $RABBITMQ_CORE_PASS 2>/dev/null
-rabbitmqctl set_permissions -p basic_vhost $RABBITMQ_CORE_USER "^&" "^&" "^users\.topic"
+rabbitmqctl set_permissions -p basic_vhost $RABBITMQ_CORE_USER "^&" "^&" "^core\.new_user$"
 
 #
 # SET PERMISSIONS FOR USERS

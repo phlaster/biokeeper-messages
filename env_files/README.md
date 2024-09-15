@@ -12,6 +12,6 @@ RABBITMQ_AUTH_PASS="YOUR_PASSWORD_HERE"
 
 .core_user.env
 ```sh
-CORE_ISER="biokeeper_core"
+RABBITMQ_CORE_USER="biokeeper_core"
 RABBITMQ_CORE_PASS="YOUR_PASSWORD_HERE"
 ```
